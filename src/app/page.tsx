@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { User, Mail, Building2, Check, ChevronDown, Info, Search, Upload } from "lucide-react";
+import { User, Mail, Building2, Check, ChevronDown, Info, Search, Upload, Loader2 } from "lucide-react";
 
 const industries = [
   "eCommerce / Internet retail",
@@ -236,6 +236,8 @@ export default function Home() {
   const [city, setCity] = useState("");
   const [fileName, setFileName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const [countries, setCountries] = useState<LocationOption[]>([]);
   const [stateOptions, setStateOptions] = useState<LocationOption[]>([]);
@@ -275,11 +277,30 @@ export default function Home() {
       .then(setCityOptions);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-    console.log("Company registration submitted:", data);
-    setSubmitted(true);
+    setSubmitError("");
+    setSubmitting(true);
+
+    try {
+      const data = new FormData(e.currentTarget);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SUPERADMIN_URL}/api/demo-requests`, {
+        method: "POST",
+        body: data,
+      });
+      const result = await res.json();
+
+      if (!res.ok || !result.success) {
+        setSubmitError(result.error || "Something went wrong. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Could not reach the server. Please check your connection and try again.");
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -456,12 +477,17 @@ export default function Home() {
 
         {/* Submit */}
         <div className="mt-8 border-t border-zinc-800 pt-6">
+          {submitError && (
+            <p className="mb-4 text-center text-sm text-red-400">{submitError}</p>
+          )}
           <div className="flex justify-center">
             <button
               type="submit"
-              className="w-full rounded-lg bg-[#3FFB00] px-16 py-3 text-sm font-semibold text-black transition hover:bg-[#3FFB00]/85 sm:w-auto"
+              disabled={submitting}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#3FFB00] px-16 py-3 text-sm font-semibold text-black transition hover:bg-[#3FFB00]/85 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
-              Submit
+              {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
+              {submitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </div>

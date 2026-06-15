@@ -16,6 +16,13 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Environment Variables
+
+- `NEXT_PUBLIC_SUPERADMIN_URL` — base URL of the PretaSystems-SuperAdmin app (e.g.
+  `https://superadmin.pretasystems.com`). The registration form POSTs to
+  `${NEXT_PUBLIC_SUPERADMIN_URL}/api/demo-requests` on submit. Set this in `.env.local` for
+  local development (e.g. `http://localhost:3001`).
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
