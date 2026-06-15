@@ -31,7 +31,7 @@ const industries = [
   "Other",
 ];
 
-const companySizes = ["1-10", "11-50", "51-200", "201-500", "500+"];
+const companySizes = ["1-50", "50-200", "200-500", "500-2000", "2000+"];
 
 type LocationOption = { name: string; isoCode: string };
 
@@ -306,7 +306,7 @@ export default function Home() {
   if (submitted) {
     return (
       <div className="flex min-h-screen w-full items-center justify-center bg-[#26272b] p-4 sm:p-8">
-        <div className="flex min-h-[500px] w-full max-w-xl flex-col items-center justify-center rounded-2xl border border-white/5 bg-[#0F141A] p-6 text-center shadow-2xl sm:min-h-[960px] sm:p-10">
+        <div className="flex min-h-[calc(100vh-2rem)] w-full max-w-xl flex-col items-center justify-center rounded-2xl border border-white/5 bg-[#0F141A] p-6 text-center shadow-2xl sm:min-h-[calc(100vh-4rem)] sm:p-10">
           <div className="relative flex items-center justify-center">
             <div className="absolute h-20 w-20 rounded-full bg-[#3FFB00]/20 blur-2xl" />
             <SuccessIcon />
