@@ -439,13 +439,13 @@ export default function Home() {
           1. Company information
         </h2>
         <div className="flex flex-col gap-4">
-          <TextField label="Company Name" name="companyName" placeholder="Enter company name" />
+          <TextField label="Company name" name="companyName" placeholder="Enter company name" />
           <TextField label="Website" name="website" placeholder="https://example.com" type="url" />
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex flex-col gap-3">
               <CustomSelect
-                label="Industry Type"
+                label="Industry type"
                 name="industryType"
                 value={industryType}
                 onChange={(v) => { setIndustryType(v); if (v !== "Other") setOtherIndustry(""); }}
@@ -465,7 +465,7 @@ export default function Home() {
               )}
             </div>
             <CustomSelect
-              label="Company Size"
+              label="Company size"
               name="companySize"
               value={companySize}
               onChange={setCompanySize}
@@ -491,23 +491,23 @@ export default function Home() {
         </h2>
         <div className="flex flex-col gap-4">
           <TextField
-            label="Your Name & Your Role"
+            label="Your name & your role"
             name="nameAndRole"
             placeholder="e.g. Jane Doe, Head of Product"
           />
           <TextField
-            label="Email Address"
+            label="Email address"
             name="email"
             type="email"
             placeholder="Enter your email"
           />
           <TextField
-            label="Who is your Engineering Lead for this pilot?"
+            label="Who is your Engineering lead for this pilot?"
             name="engineeringLead"
             placeholder="Full name and email"
           />
           <TextField
-            label="Who is your Compliance Lead for this pilot?"
+            label="Who is your Compliance lead for this pilot?"
             name="complianceLead"
             placeholder="Full name and email"
           />
@@ -520,7 +520,7 @@ export default function Home() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <MultiSelect
-              label="Compliance Frameworks you currently follow"
+              label="Compliance frameworks you currently follow"
               name="complianceFrameworks"
               selected={complianceFrameworks}
               onChange={(v) => { setComplianceFrameworks(v); if (!v.includes("Other")) setOtherCompliance(""); }}
